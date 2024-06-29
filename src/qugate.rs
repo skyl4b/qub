@@ -5,11 +5,11 @@ use crate::qubit::Qubit;
 
 /// A quantum gate is a unitary operator that acts on a qubit.
 #[derive(Debug, PartialEq)]
-pub struct QuantumGate<T: Float> {
+pub struct QuGate<T: Float> {
     matrix: Array2<Complex<T>>,
 }
 
-impl<T: Float + 'static> QuantumGate<T> {
+impl<T: Float + 'static> QuGate<T> {
     /// Create a new quantum gate with the given matrix.
     pub fn new(matrix: Array2<Complex<T>>) -> Self {
         Self { matrix }
@@ -23,7 +23,7 @@ impl<T: Float + 'static> QuantumGate<T> {
     }
 }
 
-impl<T: Float + 'static> QuantumGate<T> {
+impl<T: Float + 'static> QuGate<T> {
     /// Create a Pauli-X gate.
     pub fn pauli_x() -> Self {
         Self::new(array![
@@ -92,7 +92,7 @@ mod tests {
     #[test]
     fn pauli_x() {
         let qubit = Qubit::<f64>::zero();
-        let x_gate = QuantumGate::pauli_x();
+        let x_gate = QuGate::pauli_x();
 
         assert_eq!(x_gate.apply(&qubit), Qubit::one());
     }
@@ -100,7 +100,7 @@ mod tests {
     #[test]
     fn pauli_y() {
         let qubit = Qubit::<f64>::zero();
-        let y_gate = QuantumGate::pauli_y();
+        let y_gate = QuGate::pauli_y();
 
         assert_eq!(
             y_gate.apply(&qubit),
@@ -111,7 +111,7 @@ mod tests {
     #[test]
     fn pauli_z() {
         let qubit = Qubit::<f64>::zero();
-        let z_gate = QuantumGate::pauli_z();
+        let z_gate = QuGate::pauli_z();
 
         assert_eq!(z_gate.apply(&qubit), Qubit::zero());
     }
@@ -119,7 +119,7 @@ mod tests {
     #[test]
     fn hadamard() {
         let qubit = Qubit::zero();
-        let h_gate = QuantumGate::hadamard();
+        let h_gate = QuGate::hadamard();
         let norm_factor = 1.0 / 2.0.sqrt();
 
         assert_eq!(

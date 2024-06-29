@@ -1,2 +1,2 @@
 pub mod qubit;
-pub mod quantum_gate;
+pub mod qugate;
